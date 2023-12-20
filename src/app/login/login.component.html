@@ -6,10 +6,20 @@
          <img class="w-75 mt-2" src="https://cdn.pixabay.com/photo/2020/10/23/20/31/man-5679897_1280.png" alt="">
      </div>
      <div class="col-lg-6">
-         <form style="border: 1px solid black;" class="rounded" action="">
+         <form [formGroup]="loginForm" style="border: 1px solid black;" class="rounded" action="" (ngSubmit)="login()">
              <div class="d-flex justify-content-center align-items-center flex-column p-5 mt-5">
-                 <input style="border: 0px; border-bottom: 1px solid;" type="email" name="email" class="form-control mt-3" placeholder="email">
-                 <input style="border: 0px; border-bottom: 1px solid;" type="text" name="pswd" class="form-control mt-3" placeholder="password">
+                 <input style="border: 0px; border-bottom: 1px solid;" type="email" name="email" class="form-control mt-3" placeholder="email"  formControlName="email">
+                 <!-- validation -->
+                 <div *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched" class="mb-3 text-danger fw-bolder">
+                    *Invalid email
+                </div>
+
+                 <input style="border: 0px; border-bottom: 1px solid;" type="text" name="pswd" class="form-control mt-3" placeholder="password" formControlName="password">
+                <!-- validation -->
+                <div *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched" class="mb-3 text-danger fw-bolder">
+                    *Invalid password
+                </div>
+
                  <input type="submit" value="Submit" class="btn btn-outline-dark mt-3">
              </div>
              <p class="text-center">New user?<a routerLink="/user/register">Register</a></p>
