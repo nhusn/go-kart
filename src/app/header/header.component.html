@@ -20,8 +20,14 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="user/cart">Cart</a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="!loginUsername" class="nav-item">
             <a class="nav-link" routerLink="user/login">Login</a>
+          </li>
+          <li *ngIf="loginUsername" class="nav-item">
+            <a class="nav-link fw-bolder"><i class="fa-solid fa-user"></i><span class="text-primary">{{loginUsername}}</span></a>
+          </li>
+          <li *ngIf="loginUsername" class="nav-item">
+            <a class="nav-link fw-bolder" (click)="logout()" ><i class="fa-solid fa-right-from-bracket"></i></a>
           </li>
         </ul>
         
