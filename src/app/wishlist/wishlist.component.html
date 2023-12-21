@@ -1,31 +1,31 @@
 <app-header></app-header>
 <div style="margin-top: 60px;">
-    <div class="empty-wishlist mt-5 mb-5 d-flex justify-content-center align-items-center w-100">
+    <div *ngIf="allWishlistProducts.length==0" class="empty-wishlist mt-5 mb-5 d-flex justify-content-center align-items-center w-100">
         <img routerLink="" style="cursor: pointer;" src="https://i.pinimg.com/originals/82/e6/4f/82e64ffa12370f75a4d4a05c3870a894.gif" alt="">
     </div>
 
     
-    <div class="wishlist">
+    <div *ngIf="allWishlistProducts" class="wishlist">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div class="card h-100" routerLink="/view/1">
+                <div *ngFor="let product of allWishlistProducts" class="col mb-5">
+                    <div class="card h-100">
                         <!-- Product image-->
-                        <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                        <img  routerLink="/view/1" height="250px" class="card-img-top" [src]="product.image" alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">Fancy Product</h5>
+                                <h5 class="fw-bolder">{{product.title}}</h5>
                                 <!-- Product price-->
-                                $40.00 - $80.00
+                                {{product.price}}
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div  class=" d-flex justify-content-between">
-                                <a class="btn btn-outline-dark mt-auto" href="#">Cart+</a>
-                                <a class="btn btn-outline-dark mt-auto" href="#">Wishlist+</a>
+                                <a (click)="addtoCart(product)" class="btn btn-outline-dark mt-auto">Cart+</a>
+                                <a (click)="removeItem(product._id)" class="btn btn-outline-dark mt-auto" >Wishlist -</a>
                             </div>
                         </div>
                     </div>

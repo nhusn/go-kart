@@ -36,17 +36,35 @@ export class ViewProjectComponent implements OnInit{
 
   addtoWishlist(products:any){
     if(sessionStorage.getItem("token")){
-      this.toaster.showSuccess('proceed to login');
+      this.api.addToWishlistAPI(products).subscribe({
+        next:(res:any)=>{
+          this.toaster.showSuccess('product added succesfully');
+          this.api.getWishlistCount()
+        },
+        error:(err)=>{
+          this.toaster.showWarning(err.error)
+          console.log(err);
+        }
+      })
     }else{
       this.toaster.showWarning('Please login');
-      
     }
   }
   
 
-  addtoCart(products:any){
+  addtoCart(product:any){
     if(sessionStorage.getItem("token")){
-      this.toaster.showSuccess('proceed to login');
+      Object.assign(product,{quantity:1})
+      this.api.addToCartAPI(product).subscribe({
+        next:(res:any)=>{
+          this.toaster.showSuccess(res)
+          this.api.getCartCount()
+        },
+        error:(err)=>{
+          console.log(err);
+          this.toaster.showWarning(err.error)
+        }
+      })
     }else{
       this.toaster.showWarning('Please login');
       

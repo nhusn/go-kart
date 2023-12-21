@@ -21,9 +21,10 @@ export class AllProductsComponent implements OnInit{
 
   addtoWishlist(products:any){
     if(sessionStorage.getItem("token")){
-      this.api.addToWishlistAPI(products.id).subscribe({
+      this.api.addToWishlistAPI(products).subscribe({
         next:(res:any)=>{
           this.toaster.showSuccess('product added succesfully');
+          this.api.getWishlistCount()
         },
         error:(err)=>{
           this.toaster.showWarning(err.error)
@@ -35,13 +36,24 @@ export class AllProductsComponent implements OnInit{
     }
   }
 
-  addtoCart(products:any){
+  addtoCart(product:any){
     if(sessionStorage.getItem("token")){
-      this.toaster.showSuccess('proceed to login');
+      Object.assign(product,{quantity:1})
+      this.api.addToCartAPI(product).subscribe({
+        next:(res:any)=>{
+          this.toaster.showSuccess(res)
+          this.api.getCartCount()
+        },
+        error:(err)=>{
+          console.log(err);
+          this.toaster.showWarning(err.error)
+        }
+      })
     }else{
       this.toaster.showWarning('Please login');
       
     }
   }
+
 
 }
