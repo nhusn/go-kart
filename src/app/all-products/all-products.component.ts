@@ -14,15 +14,24 @@ export class AllProductsComponent implements OnInit{
   ngOnInit(): void {
     this.api.getAllProductAPI().subscribe((res:any)=>{
       this.allProducts = res
+      console.log(this.allProducts);
+      
     })
   }
 
   addtoWishlist(products:any){
     if(sessionStorage.getItem("token")){
-      this.toaster.showSuccess('proceed to login');
+      this.api.addToWishlistAPI(products.id).subscribe({
+        next:(res:any)=>{
+          this.toaster.showSuccess('product added succesfully');
+        },
+        error:(err)=>{
+          this.toaster.showWarning(err.error)
+          console.log(err);
+        }
+      })
     }else{
       this.toaster.showWarning('Please login');
-      
     }
   }
 

@@ -13,9 +13,9 @@
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" >
                     <div class="col mb-5" *ngFor="let products of allProducts">
-                        <div class="card h-100" >
+                        <div class="card" >
                             <!-- Product image-->
-                            <img height="230px" class="card-img-top" [src]="products.image" alt="..."  routerLink="view/{{products.id}}" />
+                            <img height="250px" class="card-img-top" [src]="products.image" alt="..."  routerLink="view/{{products.id}}" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -28,8 +28,8 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div  class=" d-flex justify-content-between">
-                                    <button (click)="addtoWishlist(products)" class="btn btn-outline-dark mt-auto">Cart+</button>
-                                    <button (click)="addtoCart(products)" class="btn btn-outline-dark mt-auto">Wishlist+</button>
+                                    <button (click)="addtoCart(products)" class="btn btn-outline-dark mt-auto">Cart+</button>
+                                    <button (click)="addtoWishlist(products)" class="btn btn-outline-dark mt-auto">Wishlist+</button>
                                 </div>
                             </div>
                         </div>
