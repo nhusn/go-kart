@@ -34,5 +34,6 @@ export class HeaderComponent implements OnInit {
     this.loginUsername = ""
     this.router.navigateByUrl('')
     this.wishlistCount=0
+    this.cartCount=0
   }
 }
